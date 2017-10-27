@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dalu.ims.mapper.UserMapper">
+
+	<resultMap id="userMap" type="com.dalu.ims.pojo.User">
+		<id property="id" column="id"></id>
+		<result property="userName" column="user_name"></result>
+		<result property="sex" column="sex"></result>
+		<result property="age" column="age"></result>
+	</resultMap>
+
+	<delete id="deleteBatch" parameterType="Integer">
+		delete from user
+		where id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+</mapper>
